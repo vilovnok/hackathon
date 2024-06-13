@@ -1,13 +1,14 @@
 
 
 class Generator():
-    def __init__ (self, clf_model, chat_tokenizer, qa_tokenizer, chat_model, qa_model):
+    def __init__ (self, clf_model, chat_tokenizer, qa_tokenizer, chat_model, qa_model, translator):
         
         self.qa_model = qa_model
         self.clf_model = clf_model
         self.chat_tokenizer = chat_tokenizer
         self.qa_tokenizer = qa_tokenizer
-        self.chat_model = chat_model    
+        self.chat_model = chat_model   
+        self.translator = translator    
 
     def clf_fun(self, text: str):
         result=self.clf_model(text)
@@ -24,3 +25,11 @@ class Generator():
         res = self.qa_model.generate(**tokenized_sentence)
         decoded_res = self.qa_tokenizer.decode(res[0], skip_special_tokens=True)
         return decoded_res    
+
+    def translate_fun(self, text):        
+        sentences = text.split('.')
+        translated_sentences = []        
+        for sentence in sentences:
+            translated_sentence = self.translator.translate(sentence)            
+            translated_sentences.append(translated_sentence)
+            return '. '.join(translated_sentences)

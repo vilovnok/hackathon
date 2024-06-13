@@ -23,6 +23,12 @@ def conversation(text: str):
     return answer
 
 @celery.task
+def translation(text: str):
+    translated_sentences=pipeline.translation(text=text)
+    return translated_sentences
+
+
+@celery.task
 def generateImg(text: str):
     time.sleep(5)
     
