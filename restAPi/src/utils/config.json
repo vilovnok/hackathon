@@ -1,0 +1,5 @@
+{
+    "clf_model":"r1char9/rubert-tiny2-clf",
+    "qa_model":"r1char9/ruT5_q_a",
+    "chat_model":"r1char9/T5_chat"
+}
