@@ -1,15 +1,21 @@
-
+from utils import cleanup
 
 class Generator():
-    def __init__ (self, clf_model, chat_tokenizer, qa_tokenizer, chat_model, qa_model, translator):
+    def __init__ (self, clf_model, 
+                  chat_tokenizer, qa_tokenizer, chat_model, 
+                  qa_model, translator, image_pipe, neg_prompt, device):
         
         self.qa_model = qa_model
         self.clf_model = clf_model
         self.chat_tokenizer = chat_tokenizer
         self.qa_tokenizer = qa_tokenizer
         self.chat_model = chat_model   
-        self.translator = translator    
-
+        self.translator = translator  
+        self.neg_prompt = neg_prompt
+        self.device = device    
+        
+        self.image_model = image_pipe.to(self.device)           
+        
     def clf_fun(self, text: str):
         result=self.clf_model(text)
         return result[0]['label']
@@ -33,3 +39,19 @@ class Generator():
             translated_sentence = self.translator.translate(sentence)            
             translated_sentences.append(translated_sentence)
             return '. '.join(translated_sentences)
+
+    def generateImg(self, prompt):
+        i = 0
+        REGENERATE_STEPS=1
+        # nsfw_content_detected = True
+        # while i < self.REGENERATE_STEPS and nsfw_content_detected:
+        #     output = self.pipe(prompt, negative_prompt = self.neg_prompt)
+        #     image = output.images[0]
+        #     nsfw_content_detected = output.nsfw_content_detected[0]
+        #     i += 1
+        while i < REGENERATE_STEPS:
+            output = self.pipe(prompt, negative_prompt = self.neg_prompt)
+            image = output.images[0]
+            i += 1
+        cleanup()
+        return image
