@@ -11,7 +11,7 @@ export class DataService {
   constructor(private http:HttpClient) { }
 
   handle_post_requests(userObject: any, endpoint: string) {    
-    return this.http.post<any>(`${this.address}/${endpoint}`, userObject)
+    return this.http.post<any>(`${this.address}/${endpoint}`, userObject);
   }
 
   handle_get_all_requests(endpoint: string): Observable<any> {
