@@ -1,20 +1,18 @@
 from utils import cleanup
 
-class ImageGenerator:
-    def __init__(self, pipe, device, neg_prompt = None):
-        self.pipe = pipe
-        self.device = device
+class ImageGenerator():
+    def __init__ (self, translator, image_pipe, neg_prompt, device):   
+        self.translator = translator  
         self.neg_prompt = neg_prompt
-        self.REGENERATE_STEPS = 5
-        self.pipe.to(self.device)
-
+        self.device = device            
+        self.image_model = image_pipe.to(self.device)           
+        
     def generate(self, prompt):
         i = 0
-        nsfw_content_detected = True
-        while i < self.REGENERATE_STEPS and nsfw_content_detected:
+        REGENERATE_STEPS=1
+        while i < REGENERATE_STEPS:
             output = self.pipe(prompt, negative_prompt = self.neg_prompt)
             image = output.images[0]
-            nsfw_content_detected = output.nsfw_content_detected[0]
             i += 1
         cleanup()
         return image

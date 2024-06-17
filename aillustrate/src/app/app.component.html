@@ -3,12 +3,8 @@
   <span>{{title}}</span>
   <div class="spacer"></div>
 
-  <a aria-label="Telegram" target="_blank" rel="noopener" href="https://t.me/angular" title="Telegram">
-    <svg id="telegram-logo" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2400">
-      <path
-        d="M1200 0C537.6 0 0 537.6 0 1200s537.6 1200 1200 1200 1200-537.6 1200-1200S1862.4 0 1200 0zm520.8 844.8l-179.2 844.8c-13.6 61.6-49.6 76-100 47.6l-276.8-204.8-133.6 128.8c-14.8 14.8-27.2 27.2-55.2 27.2l20-284.4 518.8-469.2c22.8-20.8-5.2-32-36-11.6l-640.4 402-275.6-86.4c-60-18.8-61.2-60-12.8-82.4l1072-414.4c50.4-18.8 94.4 11.6 78.8 82.8z"
-        fill="#fff" />
-    </svg>
+  <a aria-label="Telegram" target="_blank" rel="noopener" href="https://huggingface.co/r1char9" title="Hugging Face">
+    <p style="color: yellow;">Hugging Face</p>
   </a>
 
   <a aria-label="Telegram" target="_blank" rel="noopener" href="https://t.me/r1char9" title="Telegram">
@@ -21,19 +17,10 @@
 </div>
 
 <div class="content" role="main">
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
+  <h2>Generator</h2>
+  <p>What do you want to see in your post?</p>
   <input type="hidden" #selection>
-  <!-- <div class="terminal" [ngSwitch]="selection.value">
-    <pre *ngSwitchDefault>ng generate component xyz</pre>
-    <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-    <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-    <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-    <pre *ngSwitchCase="'test'">ng test</pre>
-    <pre *ngSwitchCase="'build'">ng build</pre>
-  </div> -->
-
+  
   <div class="terminal" [ngSwitch]="selection.value">
     <div class="input-row">
       <input type="text" [formControl]="textControl" placeholder="Введите текст..." (keydown.enter)="sendPrompt()">
@@ -44,17 +31,11 @@
       </button>
     </div>
   </div>
-
-  <div class="container-chat">
-    <div class="text-block">
-      <p *ngIf="isLoading" class="text">Загрузка...</p>
-      <p class="text">{{text}}</p>
-    </div>
-  </div>
   
   <div class="container-image">
     <div class="image-block">
       <img src="{{image}}" alt="попроси нарисовать" (error)="onImageError($event)">
+      <p *ngIf="isLoading">Загрузка...</p>
       <p>{{title_img}}</p>
     </div>
   </div>

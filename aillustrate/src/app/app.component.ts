@@ -11,17 +11,13 @@ import { DataService } from './data.service';
 export class AppComponent {
   title = 'AIllustrate';
 
-  text: string = '';
-  title_img: string = 'ночной город';
+  title_img: string = '...';
   image = 'assets/night_city.png';
   
   base64Image: string = '';
   isLoading: boolean = false;
   selection = { value: 'default' }
-
   textControl = new FormControl('');
-
-
 
   constructor(
     private service: DataService,
@@ -32,13 +28,8 @@ export class AppComponent {
     if (this.textControl.value) {
       this.isLoading = true;
       this.service.handle_post_requests(formData.value, 'generate/prompt-prepoccesing').subscribe(res => {
-        if (res['type'] == 'image') {
-          this.image=`data:image/jpeg;base64,`+ res['image_bytes'];
-          this.title_img=res['title'];                  
-        } else if(res['type'] == 'text'){
-          this.text=res['text']
-        }
-        this.isLoading = false;
+      this.image=`data:image/jpeg;base64,`+ res['image_bytes'];                            
+      this.isLoading = false;
       }, (err) => {
         this.isLoading = false;
         if (err.status == 422) {

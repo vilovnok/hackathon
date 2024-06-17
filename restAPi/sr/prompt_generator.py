@@ -2,8 +2,6 @@ import re
 import json
 from utils import cleanup
 
-
-
 class PromptGenerator:
     def __init__(self, model, tokenizer, translator, system_prompt, template, enrichment_model, enrichment_tokenizer, device):
         self.model = model

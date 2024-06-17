@@ -22,7 +22,7 @@ app.add_middleware(
     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin","Authorization"],
 )
 
-class Prompt_to(BaseModel):
+class Request(BaseModel):
     text: str
 
 pipeline=Pipeline()
@@ -37,22 +37,15 @@ celery = Celery(
 )    
 
 @app.post('/generate/prompt-prepoccesing', status_code=201)
-def prep(data: Prompt_to):
+def prep(data: Request):
     text=data.text
-    result_clf=pipeline.classification(text=text)
-
-    if result_clf == "draw":
-        answer=pipeline.question_answer(text=text)                
-        translated_sentences=translation.delay(text=answer)
-        translated_sentences=translated_sentences.get()
-        image_path='generated.jpg'        
-        image_baytes=image_to_base64(image_path)
-        return {'image_bytes':image_baytes, 'title':answer, 'type':'image'}
-    else:
-        answer=conversation.delay(text=text)    
-        res=answer.get()                         
-        return {"text": res, 'type':'text'}
-
+    image_path='generated.jpg' 
+    translated_sentences=translation.delay(text=text)
+    translated_sentences=translated_sentences.get()
+    image=generateImg.delay(translated_sentences, image_path)
+    image=image.get()
+    image_baytes=image_to_base64(image_path)
+    return {'image_bytes':image_baytes, 'type':'jpeg'}    
 
 def image_to_base64(path:str)->str:
     pil_image=Image.open(path)
@@ -66,14 +59,9 @@ def translation(text: str):
     return translated_sentences
 
 @celery.task
-def conversation(text: str):
-    answer=pipeline.conversation(text=text)
-    return answer
-
-@celery.task
-def generateImg(text: str):
+def generateImg(text: str, path: str):
     image=pipeline.generateImg(text=text)
-    image.save('generated.jpg')
+    image.save(path)
     return 'success'
 
 @app.on_event("startup")

@@ -21,7 +21,6 @@ h6 {
 
 p {
   margin: 0;
-  // white-space: pre-wrap;
 }
 
 .spacer {
@@ -202,9 +201,6 @@ a:hover {
   margin: 0;
 }
 
-//---  CHAT BOARD  ---//
-
-.container-chat,
 .container-image {
   width: 80%;
   max-width: 600px;
@@ -220,7 +216,6 @@ a:hover {
   height: 45vh;
 }
 
-.text-block,
 .image-block {
   margin: 8px;
   margin-top: 10px;
@@ -233,15 +228,6 @@ a:hover {
   letter-spacing: 2px;
   font-family: monospace;
   overflow-y: auto;
-}
-
-.text-block {
-  height: 100px;
-  .text {
-    width: 100%;
-    margin: 8px auto;
-    overflow: auto;
-  }
 }
 
 .image-block {
