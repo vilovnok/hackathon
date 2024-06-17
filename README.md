@@ -30,5 +30,5 @@ richie@gur:~$ pip3 install -r requirements.txt
 ```
 richie@gur:~$ cd /restapi/src/
 richie@gur:~$ uvicorn main:app --port 8000 --reload 
-richie@gur:~$ uvicorn main:app --port 8000 --reload 
+richie@gur:~$ celery --app=main.celery worker --loglevel=info"   
 ```
