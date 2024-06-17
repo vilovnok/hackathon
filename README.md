@@ -1,5 +1,5 @@
 # Aillustrate
-A service for image generation without industrial engineering.
+A service for image generation without prompt engineering.
 
 ## Pipeline
 ![Pipeline](photo/scheme.png "Pipeline")
