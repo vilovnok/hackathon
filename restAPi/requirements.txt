@@ -1,0 +1,15 @@
+celery==5.1.2 
+fastapi==0.101.1 
+fastapi-cache2==0.2.1 
+pydantic==2.3.0 
+importlib-metadata<5 
+python-dotenv 
+python-multipart 
+redis 
+uvicorn 
+gunicorn 
+diffusers  
+deep_translator 
+accelerate 
+sentencepiece 
+protobuf==3.20

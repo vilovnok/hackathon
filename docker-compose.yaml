@@ -1,0 +1,39 @@
+version: "3.8" 
+services: 
+  web: 
+    container_name: web 
+    restart: always   
+    build:  
+      context: ./aillustrate 
+    ports: 
+      - 80:80 
+    expose: 
+      - 80    
+# ["/restapi/app.sh","app"]    
+  redis: 
+    image: redis:6.2-alpine 
+    container_name: redis 
+ 
+  api: 
+    container_name: api   
+    restart: always   
+    build:  
+      context: ./restapi  
+    ports: 
+      - "8000:8000" 
+    command: > 
+      sh -c "cd target &  
+      gunicorn target.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000 & 
+      celery --app=target.main.celery worker --loglevel=info" 
+    depends_on: 
+      - redis      
+    environment: 
+      - CELERY_BROKER_URL=redis://redis:6379/0 
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0       
+    deploy: 
+        resources: 
+            reservations: 
+                devices: 
+                - capabilities: [gpu]    
+    mem_limit: 30g 
+    memswap_limit: 30g

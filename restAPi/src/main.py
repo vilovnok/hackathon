@@ -11,6 +11,7 @@ from fastapi_cache import FastAPICache
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_cache.backends.redis import RedisBackend
 
+
 app = FastAPI(title='RestAPI')
 origins = ["http://localhost","http://localhost:4200"]
 
@@ -43,7 +44,7 @@ def prep(data: Request):
     translated_sentences=translation.delay(text=text)
     translated_sentences=translated_sentences.get()
     image=generateImg.delay(translated_sentences, image_path)
-    image=image.get()
+    image=image.get()    
     image_baytes=image_to_base64(image_path)
     return {'image_bytes':image_baytes, 'type':'jpeg'}    
 

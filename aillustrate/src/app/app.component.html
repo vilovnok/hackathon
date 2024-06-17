@@ -36,7 +36,7 @@
     <div class="image-block">
       <img src="{{image}}" alt="попроси нарисовать" (error)="onImageError($event)">
       <p *ngIf="isLoading">Загрузка...</p>
-      <p>{{title_img}}</p>
+      <p *ngIf="!isLoading">{{title_img}}</p>
     </div>
   </div>
 
