@@ -1,8 +1,0 @@
-{
-    "CLF_MODEL":"r1char9/rubert-tiny2-clf",
-    "QA_MODEL":"r1char9/ruT5_q_a",
-    "CHAT_MODEL":"r1char9/T5_chat",
-    "LLM_MODEL":"meta-llama/Llama-2-7b-chat-hf",
-    "PROMPT_ENRICHMENT_MODEL":"Gustavosta/MagicPrompt-Stable-Diffusion",
-    "IMAGE_GENERATION_MODEL":"stabilityai/stable-diffusion-2-1-base"
-}
