@@ -8,8 +8,7 @@ services:
     ports: 
       - 80:80 
     expose: 
-      - 80    
-# ["/restapi/app.sh","app"]    
+      - 80       
   redis: 
     image: redis:6.2-alpine 
     container_name: redis 
@@ -21,10 +20,7 @@ services:
       context: ./restapi  
     ports: 
       - "8000:8000" 
-    command: > 
-      sh -c "cd target &  
-      gunicorn target.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000 & 
-      celery --app=target.main.celery worker --loglevel=info" 
+    command: ["/restapi/app.sh","app"] 
     depends_on: 
       - redis      
     environment: 
