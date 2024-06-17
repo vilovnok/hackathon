@@ -11,7 +11,7 @@ class ImageGenerator():
         i = 0
         REGENERATE_STEPS=1
         while i < REGENERATE_STEPS:
-            output = self.pipe(prompt, negative_prompt = self.neg_prompt)
+            output = self.image_pipe(prompt, negative_prompt = self.neg_prompt)
             image = output.images[0]
             i += 1
         cleanup()
