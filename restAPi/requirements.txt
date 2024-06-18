@@ -13,3 +13,5 @@ deep_translator
 accelerate 
 sentencepiece 
 protobuf==3.20
+torch
+huggingface_hub
