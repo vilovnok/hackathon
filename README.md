@@ -1,4 +1,4 @@
-# Aillustrate
+# Service
 A service for image generation without prompt engineering.
 
 ## Pipeline
