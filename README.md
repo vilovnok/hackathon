@@ -8,7 +8,7 @@ A service for image generation without prompt engineering.
 
 ### Clone repo to server
 ```
-richie@gur:~$ git clone https://github.com/Aillustrate/bootcamp-hackathon.git
+richie@gur:~$ git clone https://github.com/vilovnok/hackathon
 ```
 ## The first way
 ### Run application from docker-compose.yaml
@@ -17,9 +17,9 @@ richie@gur:~$ docker-compose up
 ``` 
 
 ## The second way 
-### Run application from root folder aillustrate
+### Run application from root folder service
 ```
-richie@gur:~$ cd aillustrate/ 
+richie@gur:~$ cd service/ 
 richie@gur:~$ ng serve 
 ```
 ### Install requirements.txt from root folder /restapi/
