@@ -1,4 +1,4 @@
-# Service
+# Imaginarium AI
 A service for image generation without prompt engineering.
 
 ## Pipeline
